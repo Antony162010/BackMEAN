@@ -1,0 +1,14 @@
+version: "3"
+
+services: 
+  backapp:
+    image: backmean
+    environment: 
+      MONGO_URL: "mongodb://mongomean:27017/DatabaseMEAN"
+    depends_on: 
+      - mongomean
+    ports: 
+      - "3000:5000"
+    
+  mongomean:
+    image: mongo
