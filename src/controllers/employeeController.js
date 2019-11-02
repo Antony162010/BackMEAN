@@ -2,21 +2,21 @@ const Employee = require("../models/employee"); //pongo Employee porque es un mo
 
 const EmployeesController = {};
 
-EmployeesController.getEmployees = (req, res) => { /**Callbacks */
-    Employee.find((err, usr) => {
-        if (err) {
-            return res.status(202).send(err);
-        } else {
-            Employee.find((err, usr2) => {
-                if (err) {
-                    return res.status(202).send(err);
-                } else {
-                    return res.status(200).send(usr2)
-                }
-            })
-        }
-    });
-}
+// EmployeesController.getEmployees = (req, res) => { /**Callbacks */
+//     Employee.find((err, usr) => {
+//         if (err) {
+//             return res.status(202).send(err);
+//         } else {
+//             Employee.find((err, usr2) => {
+//                 if (err) {
+//                     return res.status(202).send(err);
+//                 } else {
+//                     return res.status(200).send(usr2)
+//                 }
+//             })
+//         }
+//     });
+// }
 
 // EmployeesController.getEmployees = (req, res) => { /**Promises */
 //     Employee.find()
@@ -31,17 +31,17 @@ EmployeesController.getEmployees = (req, res) => { /**Callbacks */
 //         });
 // }
 
-// EmployeesController.getEmployees = async (req, res) => { /**Asnyc-await */
-//     try {
-//         const employees = await Employee.find();
-//         res.status(200).send(employees);
-//     } catch (error) {
-//         res.status(202).send(error);
-//     }
-// }
+EmployeesController.getEmployees = async (req, res) => { /**Asnyc-await */
+    try {
+        const employees = await Employee.find();
+        res.status(200).send(employees);
+    } catch (error) {
+        res.status(202).send(error);
+    }
+}
 
 
-EmployeesController.insertEmployees = async(req, res) => {
+EmployeesController.insertEmployees = async (req, res) => {
     const employee = new Employee(req.body);
     await employee.save();
 
@@ -50,14 +50,14 @@ EmployeesController.insertEmployees = async(req, res) => {
     });
 };
 
-EmployeesController.getEmployeeById = async(req, res) => {
+EmployeesController.getEmployeeById = async (req, res) => {
     const employee = await Employee.findById(req.params.id);
     res.status(200).json({
         employee
     });
 };
 
-EmployeesController.updateEmployee = async(req, res) => {
+EmployeesController.updateEmployee = async (req, res) => {
     const employee = {
         name: req.body.name,
         position: req.body.position,
@@ -74,7 +74,7 @@ EmployeesController.updateEmployee = async(req, res) => {
     });
 };
 
-EmployeesController.deleteEmployee = async(req, res) => {
+EmployeesController.deleteEmployee = async (req, res) => {
     await Employee.findByIdAndRemove(req.params.id);
 
     res.status(200).json({

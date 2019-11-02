@@ -10,4 +10,4 @@ COPY [".", "/usr/src/"]
 
 EXPOSE 5000
 
-CMD [ "npx", "nodemon", "src/index.js" ]
+CMD [ "npx", "nodemon", "src/app.js" ]

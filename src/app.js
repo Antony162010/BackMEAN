@@ -1,3 +1,6 @@
+/**
+ * Modules
+ */
 const morgan = require("morgan"),
   chalk = require("chalk"),
   path = require("path"),
@@ -5,9 +8,7 @@ const morgan = require("morgan"),
   compression = require('compression'),
   expbhs = require('express-handlebars'),
   express = require("express"),
-  app = express(),
-  io = require('./services/socket')(app),
-  { mongoose } = require("./config/database");
+  app = express();
 
 /**
  * Settings
@@ -17,7 +18,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const HOST = process.env.APP_HOST || '0.0.0.0',
-  routes = require("./routes/index");
+  routes = require("./routes/index"),
+  io = require('./services/socket')(app),
+  { mongoose } = require("./config/database");
 
 app.set("port", (process.env.APP_PORT || process.env.PORT || 3000));
 app.set('views', path.join(__dirname, 'views'));

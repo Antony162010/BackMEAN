@@ -7,7 +7,8 @@
         "start": "cross-env NODE_ENV=production node src/app.js",
         "dev": "cross-env NODE_ENV=development nodemon -L src/app.js",
         "test": "mocha src/tests/",
-        "pm2": "cross-env NODE_ENV=production pm2 src/index.js"
+        "pm2": "cross-env NODE_ENV=production pm2 src/index.js",
+        "sonar": "sonar-scanner.bat -Dsonar.projectKey=BackMEAN -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=916efccac1d3a18c807770d38ff6be1e9a42f623"
     },
     "keywords": [],
     "author": "",

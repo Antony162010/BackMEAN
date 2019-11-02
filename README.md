@@ -1,12 +1,13 @@
-# Project Title
+# BackMEAN
 
-A nice project with a nice description
+Project to test all new technologies: Node.js, Express, JWT, MongoDB (Mongoose), Multer, Nodemailer, Twilio, Docker, GraphQL, Mocha, Bots, GITLAB DEVOPS, AWS.
+All these technologies will have a simple example of their use.
 
 ---
 
 ## Requirements
 
-For development, you will only need Node.js and a node global package, Yarn, installed in your environement.
+For development, you will only need Node.js and a node global package, npm, installed in your environement.
 
 ### Node
 
@@ -23,48 +24,40 @@ For development, you will only need Node.js and a node global package, Yarn, ins
       $ sudo apt install npm
 
 - #### Other Operating Systems
+
   You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
 
 If the installation was successful, you should be able to run the following command.
 
     $ node --version
-    v8.11.3
+    v10.15.1
 
     $ npm --version
-    6.1.0
+    6.11.3
 
 If you need to update `npm`, you can make it using `npm`! Cool right? After running the following command, just open again the command line and be happy.
 
     $ npm install npm -g
 
-###
-
-### Yarn installation
-
-After installing node, this project will need yarn too, so just run the following command.
-
-      $ npm install -g yarn
-
----
-
 ## Install
 
-    $ git clone https://github.com/YOUR_USERNAME/PROJECT_TITLE
-    $ cd PROJECT_TITLE
-    $ yarn install
+    $ git clone https://gitlab.com/personal-antony/node.js/backmean.git
+    $ cd BackMEAN
+    $ npm install
 
 ## Configure app
 
-Open `a/nice/path/to/a.file` then edit it with your settings. You will need:
+Open `./src/config` then edit it with your settings. You will need:
 
-- A setting;
+- A setting:
+  - Copy .env.example in config folder, to the root folder and rename to .env
 - Another setting;
 - One more setting;
 
 ## Running the project
 
-    $ yarn start
+    $ npm start
 
 ## Simple build for production
 
-    $ yarn build
+    $ npm pm2 ecosystem.config.js
