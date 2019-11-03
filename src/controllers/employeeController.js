@@ -66,7 +66,7 @@ EmployeesController.updateEmployee = async (req, res) => {
     };
 
     await Employee.findByIdAndUpdate(
-        req.params.id, { $set: employee }, { new: true }
+        req.params.id, { $set: employee }, { new: false }
     );
 
     res.status(200).json({
