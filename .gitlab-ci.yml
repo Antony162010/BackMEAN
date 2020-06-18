@@ -5,6 +5,7 @@ stages:
   - test
 
 variables:
+  NODE_ENV: test
   MONGODB_URI: "mongodb+srv://antonis162010:1adqZtaQqCo2He6i@cluster0-e8afc.mongodb.net/training-dev?retryWrites=true&w=majority"
   JWT_KEY: 123456
   APP_PORT: 3000
