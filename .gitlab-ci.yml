@@ -1,0 +1,19 @@
+image: node:11.1.0
+
+stages:
+  - install
+
+install-dependencies:
+  stage: install
+  script:
+    - npm install
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      when: always
+  artifacts:
+   expire_in: 1hr
+   paths:
+    - node_modules/
+  cache:
+    paths:
+      - node_modules/
