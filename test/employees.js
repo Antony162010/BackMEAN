@@ -3,8 +3,7 @@ var chai = require("chai");
 var chaiHttp = require("chai-http");
 var expect = chai.expect;
 var should = chai.should();
-
-const server = require("../src/app");
+var server = require('../src/app');
 
 chai.use(chaiHttp);
 
@@ -28,11 +27,26 @@ describe("GET /api/employees", () => {
   it("should respond with all employees - callbacks", done => {
     chai
       .request(server)
-      .get("/api/employees")
+      .get("/api/v1/employees")
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
-        res.type.should.equal("application/json");
+        res.body.should.be.a('array');
+
+        done();
+      });
+  });
+});
+
+describe("GET /api/employees/:id", () => {
+  it("should respond with a single employee - callback", done => {
+    chai
+      .request(server)
+      .get("/api/v1/employees/5e41d882f12bab2fb89463e4")
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
 
         done();
       });
