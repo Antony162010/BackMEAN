@@ -2,6 +2,7 @@ image: node:11.1.0
 
 stages:
   - install
+  - test
 
 install-dependencies:
   stage: install
@@ -17,3 +18,10 @@ install-dependencies:
   cache:
     paths:
       - node_modules/
+
+test-app:
+  stage: test
+  dependencies:
+    - install-dependencies
+  script:
+    - npm test
