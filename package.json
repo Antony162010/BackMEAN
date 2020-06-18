@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node src/app.js",
         "dev": "nodemon -L src/app.js",
-        "test": "mocha ./test/ --exit",
+        "test": "mocha --exit",
         "pm2": "pm2 src/index.js",
         "sonar": "sonar-scanner.bat -Dsonar.projectKey=BackMEAN -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=916efccac1d3a18c807770d38ff6be1e9a42f623"
     },
