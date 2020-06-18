@@ -31,7 +31,22 @@ describe("GET /api/employees", () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
-        res.type.should.equal("application/json");
+        res.body.should.be.a('array');
+
+        done();
+      });
+  });
+});
+
+describe("GET /api/employees/:id", () => {
+  it("should respond with a single employee - callback", done => {
+    chai
+      .request(server)
+      .get("/api/v1/employees/5e41d882f12bab2fb89463e4")
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
 
         done();
       });
