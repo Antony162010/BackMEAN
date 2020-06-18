@@ -3,8 +3,7 @@ var chai = require("chai");
 var chaiHttp = require("chai-http");
 var expect = chai.expect;
 var should = chai.should();
-
-const server = require("../src/app");
+var server = require('../src/app');
 
 chai.use(chaiHttp);
 
@@ -28,7 +27,7 @@ describe("GET /api/employees", () => {
   it("should respond with all employees - callbacks", done => {
     chai
       .request(server)
-      .get("/api/employees")
+      .get("/api/v1/employees")
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
