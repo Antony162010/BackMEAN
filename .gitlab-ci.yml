@@ -14,11 +14,11 @@ variables:
 
 install-dependencies:
   stage: install
-  script:
-    - npm install
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
       when: always
+  script:
+    - npm install
   artifacts:
     expire_in: 1hr
     paths:
@@ -29,6 +29,9 @@ install-dependencies:
 
 test-app:
   stage: test
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      when: always
   dependencies:
     - install-dependencies
   script:
