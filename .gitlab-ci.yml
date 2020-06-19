@@ -61,4 +61,4 @@ deploy-app:
     - ssh-keyscan 68.183.115.52 >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script: 
-    - ssh root@68.183.115.52 "cd /var/www/html/backmean && git checkout develop && git pull"
+    - ssh root@68.183.115.52 "cd /var/www/html/backmean && git checkout develop && git pull origin develop && pm2 restart"

@@ -5,7 +5,7 @@ const EmployeeController = require('../controllers/employeeController'),
     authenticate = require('../middlewares/authenticate');
 
 router
-    .get('/', EmployeeController.getEmployees)
+    // .get('/', EmployeeController.getEmployees)
     .post('/', [
         check('name').isString().exists(),
         check('position').isString().exists(),
