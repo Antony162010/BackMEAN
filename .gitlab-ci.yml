@@ -56,9 +56,9 @@ deploy-app:
     # - mkdir -p ~/.ssh
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 700 ~/.ssh
+    - chmod 700 ~/.ssh/id_rsa
     - eval $(ssh-agent -s)
-    - chmod 400 ~/.ssh/id_rsa
+    # - chmod 400 ~/.ssh/id_rsa
     - ssh-add ~/.ssh/id_rsa
     # - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
     # - echo "$SSH_PRIVATE_KEY" | ssh-add -
