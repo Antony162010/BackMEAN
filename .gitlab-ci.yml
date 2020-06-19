@@ -52,9 +52,6 @@ deploy-app:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
-    # Inject the remote's private key
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - chmod 700 ~/.ssh
   script: 
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - ssh root@68.183.115.52 "cd /var/www/html/backmean && git checkout develop && git pull"
