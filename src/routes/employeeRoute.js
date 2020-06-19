@@ -21,9 +21,9 @@ router
         check('position').isString().exists(),
         check('office').isString().exists(),
         check('salary').isNumeric().exists(),
-    ], EmployeeController.updateEmployee);
-    // .delete('/:id', [
-    //     check('id').isMongoId()
-    // ], EmployeeController.deleteEmployee);
+    ], EmployeeController.updateEmployee)
+    .delete('/:id', [
+        check('id').isMongoId()
+    ], EmployeeController.deleteEmployee);
 
 module.exports = router;
