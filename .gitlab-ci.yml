@@ -44,10 +44,20 @@ test-app:
 
 deploy-app:
   stage: deploy
-  variables:
-    NODE_ENV: production
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
       when: always
+  before_script:
+    # Check for ssh-agent + rsync and install if not present
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )'
+    - 'which rsync || ( apt-get update -y && apt-get install rsync -y )'
+    - eval $(ssh-agent -s)
+    # Inject the remote's private key
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    # Append keyscan output into known hosts
+    - ssh-keyscan 68.183.115.52 >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
   script: 
-    - npm start
+    - ssh root@68.183.115.52 "cd /var/www/html/backmean && git checkout develop && git pull"
