@@ -5,7 +5,7 @@ const EmployeeController = require('../controllers/employeeController'),
     authenticate = require('../middlewares/authenticate');
 
 router
-    // .get('/', EmployeeController.getEmployees)
+    .get('/', EmployeeController.getEmployees)
     .post('/', [
         check('name').isString().exists(),
         check('position').isString().exists(),
@@ -21,9 +21,9 @@ router
         check('position').isString().exists(),
         check('office').isString().exists(),
         check('salary').isNumeric().exists(),
-    ], EmployeeController.updateEmployee)
-    .delete('/:id', [
-        check('id').isMongoId()
-    ], EmployeeController.deleteEmployee);
+    ], EmployeeController.updateEmployee);
+    // .delete('/:id', [
+    //     check('id').isMongoId()
+    // ], EmployeeController.deleteEmployee);
 
 module.exports = router;
