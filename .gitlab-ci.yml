@@ -3,9 +3,10 @@ image: node:11.1.0
 stages:
   - install
   - test
+  # - build
+  - deploy
 
 variables:
-  NODE_ENV: test
   MONGODB_URI: "mongodb+srv://antonis162010:1adqZtaQqCo2He6i@cluster0-e8afc.mongodb.net/training-dev?retryWrites=true&w=majority"
   JWT_KEY: 123456
   APP_PORT: 3000
@@ -14,6 +15,8 @@ variables:
 
 install-dependencies:
   stage: install
+  variables:
+    NODE_ENV: test
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
       when: always
@@ -29,6 +32,8 @@ install-dependencies:
 
 test-app:
   stage: test
+  variables:
+    NODE_ENV: test
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
       when: always
@@ -36,3 +41,13 @@ test-app:
     - install-dependencies
   script:
     - npm test
+
+deploy-app:
+  stage: deploy
+  variables:
+    NODE_ENV: production
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      when: always
+  script: 
+    - npm start
