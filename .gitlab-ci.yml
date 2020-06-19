@@ -50,17 +50,15 @@ deploy-app:
       when: always
   before_script:
     # Check for ssh-agent + rsync and install if not present
-    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
-    # Inject the remote's private key
-    # - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
-    # - mkdir -p ~/.ssh
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 700 ~/.ssh/id_rsa
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )'
     - eval $(ssh-agent -s)
-    - ssh-add ~/.ssh/id_rsa
-    - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
-    # - echo "$SSH_PRIVATE_KEY" | ssh-add -
-    # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-  script:
+    # Inject the remote's private key
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - chmod 700 ~/.ssh
+    # # Append keyscan output into known hosts
+    - ssh-keyscan 68.183.115.52 >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script: 
     - ssh root@68.183.115.52 "cd /var/www/html/backmean && git checkout develop && git pull"
