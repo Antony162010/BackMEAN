@@ -43,6 +43,7 @@ test-app:
     - npm test
 
 deploy-app:
+  image: ubuntu:latest
   stage: deploy
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
