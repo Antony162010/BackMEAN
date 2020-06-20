@@ -5,31 +5,34 @@ const morgan = require("morgan"),
   chalk = require("chalk"),
   path = require("path"),
   cors = require("cors"),
-  compression = require('compression'),
-  expbhs = require('express-handlebars'),
+  compression = require("compression"),
+  expbhs = require("express-handlebars"),
   express = require("express"),
   app = express();
 
 /**
  * Settings
  */
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config(); // variables de entorno
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config(); // variables de entorno
 }
 
-const HOST = process.env.APP_HOST || '0.0.0.0',
+const HOST = process.env.APP_HOST || "0.0.0.0",
   routes = require("./routes/index"),
-  io = require('./services/socket')(app),
+  io = require("./services/socket")(app),
   { mongoose } = require("./config/database");
 
-app.set("port", (process.env.APP_PORT || process.env.PORT || 3000));
-app.set('views', path.join(__dirname, 'views'));
-app.engine('.hbs', expbhs({
-  defaultLayout: 'main',
-  layoutsDir: path.join(app.get('views'), 'layouts'),
-  partialsDir: path.join(app.get('views'), 'partials'),
-  extname: '.hbs'
-}));
+app.set("port", process.env.APP_PORT || process.env.PORT || 3000);
+app.set("views", path.join(__dirname, "views"));
+app.engine(
+  ".hbs",
+  expbhs({
+    defaultLayout: "main",
+    layoutsDir: path.join(app.get("views"), "layouts"),
+    partialsDir: path.join(app.get("views"), "partials"),
+    extname: ".hbs",
+  })
+);
 
 /**
  * Middlewares
@@ -55,14 +58,18 @@ routes.getRoutes(app);
 /**
  * Public files
  */
-app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.static(path.join(__dirname + "/public")));
 
 /**
  * Start server
  */
 io.listen(app.get("port"), HOST, () => {
-  process.env.NODE_ENV !== 'production'
-    ? console.log(chalk.bgGreen.black(`Server start on:`) + ' ' + `http://${HOST}:${app.get("port")}`)
+  process.env.NODE_ENV !== "production"
+    ? console.log(
+        chalk.bgGreen.black(`Server start on:`) +
+          " " +
+          `http://${HOST}:${app.get("port")}`
+      )
     : console.log(chalk.bgGreen.black(`Server start`));
 });
 

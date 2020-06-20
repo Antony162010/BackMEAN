@@ -4,7 +4,7 @@ const JWT = {};
 
 JWT.createToken = (user) => {
   const payload = user;
-  return jwt.sign(payload, process.env.JWT_KEY);
+  return jwt.sign({payload}, process.env.JWT_KEY);
 }
 
 JWT.getPayload = (bearerToken) => {

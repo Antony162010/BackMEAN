@@ -1,7 +1,7 @@
 const indexRouter = {}
 
 const Routes = {
-    employeeRouter: require('./employeeRoute'),
+    employeeRouter: require('./employee.routes'),
 }
 
 indexRouter.getRoutes = (app) => {
