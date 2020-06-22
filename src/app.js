@@ -17,12 +17,12 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config(); // variables de entorno
 }
 
-const HOST = process.env.APP_HOST || "0.0.0.0",
+const HOST = process.env.APP_HOST ? process.env.APP_HOST : "0.0.0.0",
   routes = require("./routes/index"),
   io = require("./services/socket")(app),
   { mongoose } = require("./config/database");
 
-app.set("port", process.env.APP_PORT || process.env.PORT || 3000);
+app.set("port", process.env.APP_PORT ? process.env.APP_PORT : 3000);
 app.set("views", path.join(__dirname, "views"));
 app.engine(
   ".hbs",

@@ -50,7 +50,7 @@ deploy-app:
       when: always
   before_script:
     # Check for ssh-agent + rsync and install if not present
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )'
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
     - eval $(ssh-agent -s)
     # Inject the remote's private key
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
@@ -60,5 +60,8 @@ deploy-app:
     # # Append keyscan output into known hosts
     - ssh-keyscan 68.183.115.52 >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
-  script: 
+  script:
+    # Connect and update branch with new changes 
     - ssh root@68.183.115.52 "cd /var/www/html/backmean && git checkout develop && git pull origin develop"
+    # 
+    - ssh root@68.183.115.52 "cd /var/www/html/backmean && docker-compose build && docker-compose up"

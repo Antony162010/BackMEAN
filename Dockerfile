@@ -1,13 +1,12 @@
-FROM node:10
+FROM node:12
 
-COPY ["package.json", "package-lock.json", "/usr/src/"]
+WORKDIR /app
 
-WORKDIR /usr/src
+COPY package*.json  ./
 
 RUN npm install
 
-COPY [".", "/usr/src/"]
+COPY . .
 
-EXPOSE 5000
-
-CMD [ "npx", "nodemon", "src/app.js" ]
+EXPOSE 3000
+CMD [ "npm", "start" ]

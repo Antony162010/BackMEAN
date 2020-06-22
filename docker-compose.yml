@@ -1,14 +1,13 @@
-version: "3"
+version: "2.2"
 
-services: 
+services:
   backapp:
     image: backmean
-    environment: 
-      MONGO_URL: "mongodb://mongomean:27017/DatabaseMEAN"
-    depends_on: 
-      - mongomean
-    ports: 
-      - "3000:5000"
-    
-  mongomean:
-    image: mongo
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: "mongodb+srv://antonis162010:1adqZtaQqCo2He6i@cluster0-e8afc.mongodb.net/training-dev?retryWrites=true&w=majority"
+      JWT_KEY: 123456
+      APP_PORT: 3000
+      APP_URL: /api/v1
+    ports:
+      - "3000:3000"
