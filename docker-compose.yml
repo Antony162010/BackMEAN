@@ -2,7 +2,8 @@ version: "2.2"
 
 services:
   backapp:
-    image: backmean
+    build: .
+    restart: always
     environment:
       NODE_ENV: production
       MONGODB_URI: "mongodb+srv://antonis162010:1adqZtaQqCo2He6i@cluster0-e8afc.mongodb.net/training-dev?retryWrites=true&w=majority"
@@ -11,3 +12,4 @@ services:
       APP_URL: /api/v1
     ports:
       - "3000:3000"
+    container_name: backmean

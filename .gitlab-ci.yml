@@ -64,4 +64,4 @@ deploy-app:
     # Connect and update branch with new changes 
     - ssh root@68.183.115.52 "cd /var/www/html/backmean && git checkout develop && git pull origin develop"
     # 
-    - ssh root@68.183.115.52 "cd /var/www/html/backmean && docker-compose build && docker-compose up"
+    - ssh root@68.183.115.52 "cd /var/www/html/backmean && docker-compose build && docker-compose up -d"
