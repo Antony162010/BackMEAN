@@ -65,4 +65,4 @@ deploy-app:
     - ssh root@68.183.115.52 "cd /var/www/html/backmean && git checkout develop && git pull origin develop"
     # Clean containers and images pass
     # Docker update images and run
-    - ssh root@68.183.115.52 "cd /var/www/html/backmean && docker rm $(docker ps -a -q) && docker rmi $(docker images -f "dangling=true" -q) && docker-compose build && docker-compose up -d"
+    - ssh root@68.183.115.52 "cd /var/www/html/backmean && docker-compose build && docker-compose up -d"
