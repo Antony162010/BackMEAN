@@ -22,6 +22,10 @@ install-dependencies:
       when: always
   script:
     - npm install
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - node_modules/
   cache:
     paths:
       - node_modules/
