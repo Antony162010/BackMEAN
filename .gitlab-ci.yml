@@ -41,11 +41,11 @@ test-app:
     - install-dependencies
   script:
     - npm test
+  allow_failure: false
 
 deploy-app:
   image: ubuntu:latest
   stage: deploy
-  allow_failure: false
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
       when: always
