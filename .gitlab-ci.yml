@@ -48,7 +48,7 @@ deploy-app:
   stage: deploy
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
-      when: always
+      when: on_success
   before_script:
     # Check for ssh-agent + rsync and install if not present
     - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
