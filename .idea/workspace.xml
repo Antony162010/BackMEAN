@@ -27,8 +27,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd71f679-1bec-4a05-a5c4-8b6f4185f88b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/apis/employee.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/apis/employee.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/employee.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/employee.test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +100,7 @@
       <workItem from="1600115458420" duration="29000" />
       <workItem from="1600170185190" duration="98000" />
       <workItem from="1600206810616" duration="210000" />
-      <workItem from="1600207028977" duration="719000" />
+      <workItem from="1600207028977" duration="3416000" />
     </task>
     <servers />
   </component>

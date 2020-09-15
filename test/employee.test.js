@@ -43,7 +43,7 @@ describe("GET /api/employees/:id", () => {
   it("should respond with a single employee - callback", (done) => {
     chai
       .request(server)
-      .get("/api/v1/employees/5eee5c79bca4f00f3d365c9b")
+      .get("/api/v1/employees/5eee5c79bca4f00f3d365c9")
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
