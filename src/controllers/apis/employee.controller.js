@@ -40,7 +40,7 @@ EmployeesController.getEmployees = async (req, res) => {
                 message: "Not records found",
                 data: []
             });
-        else res.status(200).json({data: employees});
+        else res.status(200).json({message: "ok", data: employees});
     } catch (error) {
         console.log(error.stack);
         return res.status(500).json({error: error.stack});
