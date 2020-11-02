@@ -5,6 +5,9 @@ package-lock.json
 yarn.lock
 
 #Personal
+.idea/
 .scannerwork/
 public/
 .env
+
+*.log

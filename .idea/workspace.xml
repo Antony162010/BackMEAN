@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -27,7 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd71f679-1bec-4a05-a5c4-8b6f4185f88b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/test/employee.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/employee.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +69,10 @@
     </option>
   </component>
   <component name="JupyterTrust" id="c9afc89b-32e1-4aa7-8e8d-b8bfccae5838" />
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="minikube" />
+    <option name="namespace" value="default" />
+  </component>
   <component name="ProjectId" id="1hU4PuDiuxSRtExPENWB7rbAAuq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -76,7 +85,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../backmean-nest" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -98,7 +107,10 @@
       <workItem from="1600115458420" duration="29000" />
       <workItem from="1600170185190" duration="98000" />
       <workItem from="1600206810616" duration="210000" />
-      <workItem from="1600207028977" duration="4349000" />
+      <workItem from="1600207028977" duration="6265000" />
+      <workItem from="1600216262037" duration="28000" />
+      <workItem from="1600216310623" duration="2151000" />
+      <workItem from="1604340657349" duration="80000" />
     </task>
     <servers />
   </component>
@@ -130,6 +142,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="454" y="233" width="447" height="299" key="#Notifications" timestamp="1600216237113">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="454" y="233" width="447" height="299" key="#Notifications/0.0.1366.768@0.0.1366.768" timestamp="1600216237113" />
+    <state x="278" y="27" width="800" height="712" key="#Plugins" timestamp="1600216321301">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="278" y="27" width="800" height="712" key="#Plugins/0.0.1366.768@0.0.1366.768" timestamp="1600216321301" />
     <state x="466" y="141" width="424" height="484" key="FileChooserDialogImpl" timestamp="1600207021474">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -138,15 +158,16 @@
       <screen x="0" y="25" width="1366" height="743" />
     </state>
     <state x="327" y="162" width="702" height="467" key="MultipleFileMergeDialog/0.25.1366.743@0.25.1366.743" timestamp="1600087349449" />
-    <state x="199" y="38" key="SettingsEditor" timestamp="1600103779176">
-      <screen x="0" y="25" width="1366" height="743" />
-    </state>
-    <state x="199" y="29" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1600052445454" />
-    <state x="199" y="38" key="SettingsEditor/0.25.1366.743@0.25.1366.743" timestamp="1600103779176" />
-    <state x="346" y="66" width="672" height="701" key="search.everywhere.popup" timestamp="1600208871336">
+    <state x="199" y="29" key="SettingsEditor" timestamp="1600216339769">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="346" y="66" width="672" height="701" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1600208871336" />
+    <state x="199" y="29" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1600216339769" />
+    <state x="199" y="38" key="SettingsEditor/0.25.1366.743@0.25.1366.743" timestamp="1600103779176" />
+    <state x="346" y="89" width="672" height="679" key="search.everywhere.popup" timestamp="1604340697466">
+      <screen x="0" y="25" width="1366" height="743" />
+    </state>
+    <state x="346" y="66" width="672" height="701" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1600216333733" />
+    <state x="346" y="89" width="672" height="679" key="search.everywhere.popup/0.25.1366.743/1366.0.1366.768@0.25.1366.743" timestamp="1604340697466" />
     <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.25.1366.743@0.25.1366.743" timestamp="1600106695738" />
   </component>
 </project>
