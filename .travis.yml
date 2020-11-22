@@ -11,8 +11,8 @@ node_js:
 git:
   depth: 3
 
-install:
-  - yarn
+env:
+  - NODE_ENV=production
 
 script:
   - yarn test

@@ -13,7 +13,7 @@ const morgan = require("morgan"),
 /**
  * Settings
  */
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV != "production") {
   require("dotenv").config(); // variables de entorno
 }
 
