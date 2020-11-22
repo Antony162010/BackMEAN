@@ -1,6 +1,6 @@
 const mongoose = require("mongoose"),
   chalk = require("chalk"),
-  URI = process.env.MONGODB_URI;
+  URI = `${process.env.MONGODB_URI}`;
 
 mongoose
   .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true  })

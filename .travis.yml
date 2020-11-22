@@ -13,7 +13,6 @@ git:
 
 env:
   - NODE_ENV=production
-  - MONGODB_URI=mongodb+srv://antonis162010:1adqZtaQqCo2He6i@cluster0-e8afc.mongodb.net/training-dev?retryWrites=true&w=majority
 
 script:
   - yarn test
