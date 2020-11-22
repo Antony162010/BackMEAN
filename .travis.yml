@@ -1,5 +1,4 @@
 language: node_js
-os: linux
 
 cache:
   directories:
@@ -12,13 +11,13 @@ node_js:
 git:
   depth: 3
 
+script:
+  - yarn test
+
 branches:
   only:
     - master
     - develop
-
-script:
-  - yarn start
 
 notifications:
   email:
