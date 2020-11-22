@@ -2,12 +2,12 @@
     "name": "BackMEAN",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "app.js",
     "scripts": {
         "start": "node src/app.js",
         "dev": "nodemon -L src/app.js",
         "test": "mocha --exit",
-        "pm2": "pm2 src/index.js",
+        "pm2": "pm2 src/app.js"
     },
     "keywords": [],
     "author": "",

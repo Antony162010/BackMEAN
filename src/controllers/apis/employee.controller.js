@@ -26,8 +26,8 @@ EmployeesController.login = async (req, res) => {
             });
         }
     } catch (error) {
-        console.log(error.stack);
-        return res.status(500).json({error: error.stack});
+        console.error(error);
+        return res.status(500).json({message: 'System error'});
     }
 };
 
@@ -42,8 +42,8 @@ EmployeesController.getEmployees = async (req, res) => {
             });
         else res.status(200).json({message: "ok", data: employees});
     } catch (error) {
-        console.log(error.stack);
-        return res.status(500).json({error: error.stack});
+        console.error(error);
+        return res.status(500).json({message: 'System error'});
     }
 };
 
@@ -60,8 +60,8 @@ EmployeesController.insertEmployees = async (req, res) => {
             message: "Insert succesfully",
         });
     } catch (error) {
-        console.log(error.stack);
-        return res.status(500).json({error: error.stack});
+        console.error(error);
+        return res.status(500).json({message: 'System error'});
     }
 };
 
@@ -97,8 +97,8 @@ EmployeesController.updateEmployee = async (req, res) => {
             message: "Update succesfully",
         });
     } catch (error) {
-        console.log(error.stack);
-        return res.status(500).json({error: error.stack});
+        console.error(error);
+        return res.status(500).json({message: 'System error'});
     }
 };
 
@@ -110,8 +110,8 @@ EmployeesController.deleteEmployee = async (req, res) => {
             message: "Delete sucesfully",
         });
     } catch (error) {
-        console.log(error.stack);
-        return res.status(500).json({error: error.stack});
+        console.error(error);
+        return res.status(500).json({message: 'System error'});
     }
 };
 
