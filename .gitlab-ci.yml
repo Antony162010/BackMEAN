@@ -1,7 +1,3 @@
-image: docker:19.03.1
-services:
-  - docker:19.03.1-dind
-
 stages:
   - test
   # - install
@@ -28,6 +24,9 @@ stages:
 #   allow_failure: false
 
 # build-app:
+#   image: docker:19.03.1
+#   services:
+#     - docker:19.03.1-dind
 #   stage: build
 #   before_script:
 #     - apk add gettext
@@ -51,6 +50,7 @@ deploy-app:
     - gcloud auth activate-service-account --key-file ${HOME}/service-account.json  || die "unable to authenticate service account for gcloud"
     - gcloud container clusters get-credentials $GCLOUD_CLUSTER
     - envsubst < ./system/template-config.yml > ./system/template-replace.yml
+    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
     - kubectl apply -f ./system/template-replace.yml
     - kubectl set image deployments/${FERRETERIA_UID}-deployment --namespace ${NAMESPACE} ${FERRETERIA_UID}-app=$DOCKER_USERNAME/backmean:$CI_COMMIT_SHA

@@ -1,18 +1,18 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: ${FERRETERIA_UID}-cluster-ip-service
-  namespace: ${NAMESPACE}
-  labels:
-    app: ${FERRETERIA_UID}-app
-spec:
-  type: ClusterIP
-  selector:
-    app: ${FERRETERIA_UID}-app
-  ports:
-    - port: 80
-      targetPort: 80
----
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: ${FERRETERIA_UID}-cluster-ip-service
+#   namespace: ${NAMESPACE}
+#   labels:
+#     app: ${FERRETERIA_UID}-app
+# spec:
+#   type: ClusterIP
+#   selector:
+#     app: ${FERRETERIA_UID}-app
+#   ports:
+#     - port: 80
+#       targetPort: 80
+# ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: ${FERRETERIA_UID}-app
-          image: $DOCKER_USERNAME/backmean::$CI_COMMIT_SHA
+          image: $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -43,41 +43,26 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
-          env:
-            - name: FERRETERIA
-              value: ${APP_FERRETERIA}
-            - name: DOMAIN
-              value: ${APP_DOMAIN}
-            - name: DB_USER
-              value: ${APP_DB_USER}
-            - name: DB_PASSWORD
-              value: ${APP_DB_PASSWORD}
-            - name: DB_HOST
-              value: ${APP_DB_HOST}
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_DATABASE
-              value: ${APP_DB_DATABASE}
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: ${FERRETERIA_UID}-ingress-service
-  namespace: ${NAMESPACE}
-  labels:
-    app: ${FERRETERIA_UID}-app
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  rules:
-    - host: ${APP_DOMAIN}
-      http:
-        paths:
-          - path: /${FERRETERIA}
-            backend:
-              serviceName: ${FERRETERIA_UID}-cluster-ip-service
-              servicePort: 80
----
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: ${FERRETERIA_UID}-ingress-service
+#   namespace: ${NAMESPACE}
+#   labels:
+#     app: ${FERRETERIA_UID}-app
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+# spec:
+#   rules:
+#     - host: ${APP_DOMAIN}
+#       http:
+#         paths:
+#           - path: /${FERRETERIA}
+#             backend:
+#               serviceName: ${FERRETERIA_UID}-cluster-ip-service
+#               servicePort: 80
+# ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -101,3 +86,4 @@ spec:
       resource:
         name: memory
         targetAverageUtilization: 80
+---
