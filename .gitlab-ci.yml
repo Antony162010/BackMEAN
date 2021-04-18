@@ -30,6 +30,7 @@ stages:
 build-app:
   stage: build
   before_script:
+    - apk add gettext
     - envsubst '\$DATABASE' < ./scripts/deploy.sh
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
