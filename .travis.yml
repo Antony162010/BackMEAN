@@ -26,7 +26,6 @@ notifications:
   email:
     recipients:
       - antonis162010@gmail.com
-    on_success: always
     on_failure: always
 
 
