@@ -3,7 +3,7 @@ services:
   - docker:19.03.1-dind
 
 stages:
-  - test
+  # - test
   # - install
   - build
   - deploy
@@ -30,7 +30,8 @@ test-app:
 build-app:
   stage: build
   before_script:
-    - cat $DATABASE > ${CI_PROJECT_DIR}\mynewfile
+    - touch ${CI_PROJECT_DIR}\mynewfile
+    - echo $DATABASE > ${CI_PROJECT_DIR}\mynewfile
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
     - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
