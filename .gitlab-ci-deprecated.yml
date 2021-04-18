@@ -1,47 +1,54 @@
-image: docker:19.03.1
-services:
-  - docker:19.03.1-dind
+image: node:12
 
 stages:
+  - install
   - test
-  # - install
-  - build
+  # - build
   - deploy
 
+variables:
+  MONGODB_URI: "mongodb+srv://antonis162010:1adqZtaQqCo2He6i@cluster0-e8afc.mongodb.net/training-dev?retryWrites=true&w=majority"
+  JWT_KEY: 123456
+  APP_PORT: 3000
+  APP_HOST: localhost
+  APP_URL: /api/v1
+
+install-dependencies:
+  stage: install
+  variables:
+    NODE_ENV: test
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      when: always
+  script:
+    - npm install
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - node_modules/
+  cache:
+    paths:
+      - node_modules/
+
 test-app:
-  image: mhart/alpine-node:12
   stage: test
   variables:
     NODE_ENV: test
-    MONGODB_URI: "mongodb+srv://antonis162010:1adqZtaQqCo2He6i@cluster0-e8afc.mongodb.net/training-dev?retryWrites=true&w=majority"
-    JWT_KEY: 123456
-    APP_PORT: 3000
-    APP_HOST: localhost
-    APP_URL: /api/v
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
       when: on_success
+  dependencies:
+    - install-dependencies
   script:
-    - apk update
-    - yarn
-    - yarn test
+    - npm test
   allow_failure: false
 
-build-app:
-  stage: build
-  before_script:
-    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  script:
-    - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
-    - docker push $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
-  only:
-    - develop
-
 deploy-app:
+  image: ubuntu:latest
   stage: deploy
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
-      when: manual
+      when: on_success
   before_script:
     # Check for ssh-agent + rsync and install if not present
     - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
