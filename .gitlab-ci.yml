@@ -8,36 +8,36 @@ stages:
   - build
   - deploy
 
-test-app:
-  image: mhart/alpine-node:12
-  stage: test
-  variables:
-    NODE_ENV: test
-    MONGODB_URI: $DATABASE
-    JWT_KEY: 123456
-    APP_PORT: 3000
-    APP_HOST: localhost
-    APP_URL: /api/v1
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
-      when: on_success
-  script:
-    - apk update
-    - yarn
-    - yarn test
-  allow_failure: false
+# test-app:
+#   image: mhart/alpine-node:12
+#   stage: test
+#   variables:
+#     NODE_ENV: test
+#     MONGODB_URI: $DATABASE
+#     JWT_KEY: 123456
+#     APP_PORT: 3000
+#     APP_HOST: localhost
+#     APP_URL: /api/v1
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == "develop"'
+#       when: on_success
+#   script:
+#     - apk update
+#     - yarn
+#     - yarn test
+#   allow_failure: false
 
-build-app:
-  stage: build
-  before_script:
-    - apk add gettext
-    - envsubst '\$DATABASE' < ./scripts/deploy.sh > ./scripts/deploy.sh
-    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  script:
-    - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
-    - docker push $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
-  only:
-    - develop
+# build-app:
+#   stage: build
+#   before_script:
+#     - apk add gettext
+#     - envsubst '\$DATABASE' < ./scripts/deploy.sh > ./scripts/deploy.sh
+#     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+#   script:
+#     - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
+#     - docker push $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
+#   only:
+#     - develop
 
 deploy-app:
   image: google/cloud-sdk
