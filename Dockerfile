@@ -1,15 +1,20 @@
-FROM node:12
+FROM mhart/alpine-node:12
+
+RUN apk update && \
+    npm install pm2@latest -g
 
 ENV NODE_ENV=production
 
 WORKDIR /app
 
-COPY package*.json  ./
+COPY ["package.json", "yarn.lock", "./"]
 
 RUN yarn 
 
 COPY . .
 
+RUN chmod 777 /app/scripts/deploy.sh
+
 EXPOSE 3000
 
-CMD [ "yarn", "start" ]
+CMD [ "sh", "/app/scripts/deploy.sh" ]
