@@ -40,25 +40,21 @@ build-app:
     - develop
 
 deploy-app:
+  image: google/cloud-sdk
   stage: deploy
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
       when: manual
   before_script:
-    # Check for ssh-agent + rsync and install if not present
-    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
-    - eval $(ssh-agent -s)
-    # Inject the remote's private key
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - chmod 700 ~/.ssh
-    # # Append keyscan output into known hosts
-    - ssh-keyscan 167.71.55.161 >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
+    - apt-get install -y gettext
+    - echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/service-account.json
+    - gcloud auth activate-service-account --key-file ${HOME}/service-account.json  || die "unable to authenticate service account for gcloud"
+    - gcloud container clusters get-credentials $GCLOUD_CLUSTER
+    - envsubst < ./system/template-config.yml > ./system/template-replace.yml
   script:
-    # Connect and update branch with new changes
-    - ssh root@167.71.55.161 "cd /var/www/backmean && git checkout develop && git pull origin develop"
-    # Clean containers and images pass
-    # Docker update images and run
-    - ssh root@167.71.55.161 "cd /var/www/backmean && docker-compose build && docker-compose up -d"
+    - kubectl apply -f ./system/template-replace.yml
+    - kubectl set image deployments/${FERRETERIA_UID}-deployment --namespace ${NAMESPACE} ${FERRETERIA_UID}-app=$DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
+  variables:
+    FERRETERIA: 'mi-ferreteria'
+    FERRETERIA_UID: '$CI_COMMIT_REF_NAME'
+    NAMESPACE: 'development'
