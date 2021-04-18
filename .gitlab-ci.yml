@@ -30,7 +30,6 @@ stages:
 build-app:
   stage: build
   before_script:
-    - touch ${CI_PROJECT_DIR}\mynewfile
     - echo $DATABASE > ${CI_PROJECT_DIR}\mynewfile
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
