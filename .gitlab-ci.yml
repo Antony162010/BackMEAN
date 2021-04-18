@@ -13,11 +13,11 @@ test-app:
   stage: test
   variables:
     NODE_ENV: test
-    MONGODB_URI: "mongodb+srv://antonis162010:1adqZtaQqCo2He6i@cluster0-e8afc.mongodb.net/training-dev?retryWrites=true&w=majority"
+    MONGODB_URI: $DATABASE
     JWT_KEY: 123456
     APP_PORT: 3000
     APP_HOST: localhost
-    APP_URL: /api/v
+    APP_URL: /api/v1
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
       when: on_success
@@ -30,6 +30,7 @@ test-app:
 build-app:
   stage: build
   before_script:
+    - cat $DATABASE > mynewfile
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
     - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
