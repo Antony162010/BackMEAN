@@ -20,4 +20,6 @@ RUN chmod 777 /app/scripts/deploy.sh
 
 EXPOSE 3000
 
-CMD [ "sh", "/app/scripts/deploy.sh" ]
+RUN  sh /app/scripts/deploy.sh
+RUN echo $MONGODB_URI
+CMD pm2-runtime /app/ecosystem.config.js
