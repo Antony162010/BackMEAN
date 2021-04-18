@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -z "${MONGODB_URI}" ]]; then
-    MONGODB_URI="$(cat /tmp/mynewfile)"
+    MONGODB_URI="${DATABASE}"
 else
     MONGODB_URI="${MONGODB_URI}"
 fi

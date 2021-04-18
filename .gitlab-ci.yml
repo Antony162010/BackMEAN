@@ -30,7 +30,7 @@ stages:
 build-app:
   stage: build
   before_script:
-    - echo $DATABASE > ${CI_PROJECT_DIR}\mynewfile
+    - envsubst '\$DATABASE' < ./scripts/deploy.sh
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
     - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
