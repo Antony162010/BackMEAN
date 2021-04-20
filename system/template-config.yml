@@ -10,7 +10,8 @@ spec:
     app: ${FERRETERIA_UID}-app
   ports:
     - port: 3000
-      targetPort: 3000
+      name: http
+      nodePort: 30080
 ---
 apiVersion: apps/v1
 kind: Deployment
