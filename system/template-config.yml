@@ -1,23 +1,21 @@
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: ${FERRETERIA_UID}-cluster-ip-service
-#   namespace: ${NAMESPACE}
-#   labels:
-#     app: ${FERRETERIA_UID}-app
-# spec:
-#   type: ClusterIP
-#   selector:
-#     app: ${FERRETERIA_UID}-app
-#   ports:
-#     - port: 80
-#       targetPort: 80
-# ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${FERRETERIA_UID}-cluster-ip-service
+  labels:
+    app: ${FERRETERIA_UID}-app
+spec:
+  type: ClusterIP
+  selector:
+    app: ${FERRETERIA_UID}-app
+  ports:
+    - port: 3000
+      targetPort: 3000
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ${FERRETERIA_UID}-deployment
-  namespace: ${NAMESPACE}
 spec:
   replicas: 1
   selector:
@@ -35,7 +33,7 @@ spec:
           image: $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           resources:
             requests:
               cpu: 250m
@@ -43,47 +41,3 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
----
-# apiVersion: extensions/v1beta1
-# kind: Ingress
-# metadata:
-#   name: ${FERRETERIA_UID}-ingress-service
-#   namespace: ${NAMESPACE}
-#   labels:
-#     app: ${FERRETERIA_UID}-app
-#   annotations:
-#     kubernetes.io/ingress.class: nginx
-# spec:
-#   rules:
-#     - host: ${APP_DOMAIN}
-#       http:
-#         paths:
-#           - path: /${FERRETERIA}
-#             backend:
-#               serviceName: ${FERRETERIA_UID}-cluster-ip-service
-#               servicePort: 80
-# ---
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: ${FERRETERIA_UID}-autoscaler
-  namespace: ${NAMESPACE}
-  labels:
-    app: ${FERRETERIA_UID}-app
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: ${FERRETERIA_UID}-deployment
-  minReplicas: 1
-  maxReplicas: 2
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        targetAverageUtilization: 80
-    - type: Resource
-      resource:
-        name: memory
-        targetAverageUtilization: 80
----

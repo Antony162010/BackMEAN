@@ -55,6 +55,4 @@ deploy-app:
     - kubectl apply -f ./system/template-replace.yml
     - kubectl set image deployments/${FERRETERIA_UID}-deployment --namespace ${NAMESPACE} ${FERRETERIA_UID}-app=$DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
   variables:
-    FERRETERIA: 'mi-ferreteria'
     FERRETERIA_UID: '$CI_COMMIT_REF_NAME'
-    NAMESPACE: 'development'
