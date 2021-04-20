@@ -43,7 +43,7 @@ deploy-app:
   stage: deploy
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
-      when: manual
+      when: on_success
   before_script:
     - apt-get install -y gettext
     - echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/service-account.json
