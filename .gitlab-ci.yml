@@ -53,6 +53,6 @@ deploy-app:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
     - kubectl apply -f ./system/template-replace.yml
-    - kubectl set image deployments/${FERRETERIA_UID}-deployment --namespace ${NAMESPACE} ${FERRETERIA_UID}-app=$DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
+    - kubectl set image deployments/${FERRETERIA_UID}-deployment ${FERRETERIA_UID}-app=$DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
   variables:
     FERRETERIA_UID: '$CI_COMMIT_REF_NAME'
