@@ -9,9 +9,8 @@ spec:
   selector:
     app: ${FERRETERIA_UID}-app
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3000
+    - name: http
+      port: 3000
       nodePort: 30080
 ---
 apiVersion: apps/v1
@@ -36,10 +35,10 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
-          # resources:
-          #   requests:
-          #     cpu: 250m
-          #     memory: 256Mi
-          #   limits:
-          #     cpu: 500m
-          #     memory: 512Mi
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
