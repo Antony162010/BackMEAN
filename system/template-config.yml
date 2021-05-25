@@ -32,7 +32,6 @@ spec:
       containers:
         - name: ${FERRETERIA_UID}-app
           image: $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
-          command: [ "sleep" ]
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
