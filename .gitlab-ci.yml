@@ -33,6 +33,7 @@ build-app:
     - envsubst '\$DATABASE' < ./scripts/deploy-template.sh > ./scripts/deploy.sh
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
+    - cat ./scripts/deploy.sh
     - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
     - docker push $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
   only:
