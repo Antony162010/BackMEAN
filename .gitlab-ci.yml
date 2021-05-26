@@ -29,11 +29,8 @@ build-app:
     - docker:19.03.1-dind
   stage: build
   before_script:
-    - apk add gettext
-    - envsubst '\$DATABASE' < ./scripts/deploy-template.sh > ./scripts/deploy.sh
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
-    - cat ./scripts/deploy.sh
     - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA --build-arg DATABASE="$DATABASE" -f ./Dockerfile ./
     - docker push $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
   only:
