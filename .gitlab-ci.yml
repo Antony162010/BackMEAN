@@ -9,6 +9,7 @@ test-app:
   stage: test
   variables:
     NODE_ENV: test
+    MONGODB_URI: $DATABASE
     JWT_KEY: 123456
     APP_PORT: 3000
     APP_HOST: localhost
