@@ -16,9 +16,8 @@ RUN yarn
 
 COPY . .
 
-RUN chmod 777 /app/scripts/deploy.sh && \
-    sh /app/scripts/deploy.sh
+RUN chmod 777 /app/scripts/deploy.sh
 
 EXPOSE 3000
 
-CMD ["pm2-runtime", "/app/ecosystem.config.js"]
+CMD [ "sh", "/app/scripts/deploy.sh" ]

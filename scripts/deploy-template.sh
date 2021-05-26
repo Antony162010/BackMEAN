@@ -6,4 +6,4 @@ else
     MONGODB_URI="${MONGODB_URI}"
 fi
 
-# pm2-runtime /app/ecosystem.config.js
+pm2-runtime /app/ecosystem.config.js
