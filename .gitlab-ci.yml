@@ -30,9 +30,10 @@ build-app:
   stage: build
   before_script:
     - apk add gettext
-    - envsubst '\$DATABASE' < ./scripts/deploy.sh > ./scripts/deploy.sh
+    - envsubst '$DATABASE' < ./scripts/deploy.sh > ./scripts/deploy.sh
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
+    - cat ./scripts/deploy.sh
     - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
     - docker push $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
   only:
