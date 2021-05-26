@@ -30,30 +30,33 @@ build-app:
   stage: build
   before_script:
     - apk add gettext
-    - envsubst '$DATABASE' < ./scripts/deploy.sh > ./scripts/deploy.sh
+    - envsubst < ./scripts/deploy.sh > ./scripts/deploy.sh
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   script:
     - cat ./scripts/deploy.sh
+    - echo ./scripts/deploy.sh
+    - echo MONGODB_URI
+    - echo MONGODB_URI
     - docker build --tag $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA -f ./Dockerfile ./
     - docker push $DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
   only:
     - develop
 
-deploy-app:
-  image: google/cloud-sdk
-  stage: deploy
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
-      when: on_success
-  before_script:
-    - apt-get install -y gettext
-    - echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/service-account.json
-    - gcloud auth activate-service-account --key-file ${HOME}/service-account.json  || die "unable to authenticate service account for gcloud"
-    - gcloud container clusters get-credentials $GCLOUD_CLUSTER
-    - envsubst < ./system/template-config.yml > ./system/template-replace.yml
-    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  script:
-    - kubectl apply -f ./system/template-replace.yml
-    - kubectl set image deployments/${FERRETERIA_UID}-deployment ${FERRETERIA_UID}-app=$DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
-  variables:
-    FERRETERIA_UID: '$CI_COMMIT_REF_NAME'
+# deploy-app:
+#   image: google/cloud-sdk
+#   stage: deploy
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == "develop"'
+#       when: on_success
+#   before_script:
+#     - apt-get install -y gettext
+#     - echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/service-account.json
+#     - gcloud auth activate-service-account --key-file ${HOME}/service-account.json  || die "unable to authenticate service account for gcloud"
+#     - gcloud container clusters get-credentials $GCLOUD_CLUSTER
+#     - envsubst < ./system/template-config.yml > ./system/template-replace.yml
+#     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+#   script:
+#     - kubectl apply -f ./system/template-replace.yml
+#     - kubectl set image deployments/${FERRETERIA_UID}-deployment ${FERRETERIA_UID}-app=$DOCKER_USERNAME/backmean:$CI_COMMIT_SHA
+#   variables:
+#     FERRETERIA_UID: '$CI_COMMIT_REF_NAME'
