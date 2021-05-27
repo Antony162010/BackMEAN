@@ -11,3 +11,5 @@ public/
 
 *.log
 sonar-project.properties
+
+gcp-key.json
