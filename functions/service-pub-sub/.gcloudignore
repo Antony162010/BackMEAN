@@ -1,8 +1,5 @@
-.dockerignore
 .git
 .gitignore
 /node_modules
 npm-debug.log
 .env
-
-/functions
