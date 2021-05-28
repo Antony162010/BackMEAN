@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const externController = require("../controllers/apis/extern.controller"),;
+const externController = require("../controllers/apis/extern.controller");
 
 router
   .post(
