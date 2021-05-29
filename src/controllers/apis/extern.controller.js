@@ -15,7 +15,8 @@ ExternController.sendMessage = async (req, res) => {
         const report = req.body;
 
         const buffer = Buffer.from(JSON.stringify(report));
-        await pubSub.topic(process.env.GC_PUBSUB_TOPIC).publish(buffer);
+        console.log(process.env.GC_PUBSUB_TOPIC);
+        await pubSub.topic(`${process.env.GC_PUBSUB_TOPIC}`).publish(buffer);
 
         res.status(200).json({status: "correct"});
     } catch (error) {
