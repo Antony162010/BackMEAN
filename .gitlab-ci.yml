@@ -29,13 +29,13 @@ build-app:
     - docker:19.03.1-dind
   stage: build
   before_script:
+    - apk update && apk add bash && apk add gettext
     - export CONTAINER_REGISTRY=us.gcr.io/$GCLOUD_PROJECT_ID/backmean
     - echo $GCLOUD_SERVICE_KEY | base64 -d  > ${HOME}/service-account.json
     - echo $ENV_PROD | base64 -d  > ./.env.prod
     - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/service-account.json
   script:
-    - docker build --tag $CONTAINER_REGISTRY:$CI_COMMIT_SHA --build-arg DATABASE="$DATABASE" -f ./Dockerfile ./
-    - docker push $CONTAINER_REGISTRY:$CI_COMMIT_SHA
+    - bash ./scripts/build-container-prod.sh
   only:
     - develop
 
@@ -51,10 +51,10 @@ deploy-app:
     - echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/service-account.json
     - gcloud auth activate-service-account --key-file ${HOME}/service-account.json  || die "unable to authenticate service account for gcloud"
     - gcloud container clusters get-credentials $GCLOUD_CLUSTER
-    - envsubst < ./system/template-config.yml > ./system/template-replace.yml
+    - envsubst < ./system/template-k8s.yml > ./k8s.yml
     - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/service-account.json
   script:
-    - kubectl apply -f ./system/template-replace.yml
+    - kubectl apply -f ./k8s.yml
     - kubectl set image deployments/${FERRETERIA_UID}-deployment ${FERRETERIA_UID}-app=$CONTAINER_REGISTRY:$CI_COMMIT_SHA
   variables:
     FERRETERIA_UID: '$CI_COMMIT_REF_NAME'
