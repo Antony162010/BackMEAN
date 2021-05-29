@@ -29,7 +29,7 @@ build-app:
     - docker:19.03.1-dind
   stage: build
   before_script:
-    - apk update && apk add bash curl gettext python py-pip
+    - apk update && apk add bash curl gettext python3 py3-pip
     - pip install docker-compose
     - export CONTAINER_REGISTRY=us.gcr.io/$GCLOUD_PROJECT_ID/backmean
     - echo $GCLOUD_SERVICE_KEY | base64 -d  > ${HOME}/service-account.json
