@@ -34,7 +34,7 @@ build-app:
     - echo $GCLOUD_SERVICE_KEY | base64 -d  > ${HOME}/service-account.json
     - echo $ENV_PROD | base64 -d  > ./.env.prod
     - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/service-account.json
-    - curl -L --fail https://github.com/docker/compose/releases/download/1.29.2/run.sh -o /usr/local/bin/docker-compose
+    - curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     - chmod +x /usr/local/bin/docker-compose
     - docker-compose --version
   script:
