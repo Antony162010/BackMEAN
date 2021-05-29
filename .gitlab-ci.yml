@@ -31,6 +31,7 @@ build-app:
   before_script:
     - export CONTAINER_REGISTRY=us.gcr.io/$GCLOUD_PROJECT_ID/backmean
     - echo $GCLOUD_SERVICE_KEY | base64 -d  > ${HOME}/service-account.json
+    - echo $ENV_PROD | base64 -d  > ./.env.prod
     - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/service-account.json
   script:
     - docker build --tag $CONTAINER_REGISTRY:$CI_COMMIT_SHA --build-arg DATABASE="$DATABASE" -f ./Dockerfile ./

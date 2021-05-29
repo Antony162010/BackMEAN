@@ -13,3 +13,4 @@ public/
 sonar-project.properties
 
 gcp-key.json
+docker-compose.yml
