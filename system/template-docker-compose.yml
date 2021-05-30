@@ -7,5 +7,15 @@ services:
     restart: always
     env_file:
       - .env${TYPE_ENV}
+    environment: 
+      NODE_ENV: ${NODE_ENV}
+      JWT_KEY: ${JWT_KEY}
+      APP_PORT: ${APP_PORT}
+      APP_URL: ${APP_URL}
+      MONGODB_URI: ${MONGODB_URI}
+      GC_EMAIL: ${GC_EMAIL}
+      GC_PROJECT_ID: ${GC_PROJECT_ID}
+      GC_PUBSUB_TOPIC: ${GC_PUBSUB_TOPIC}
+      GC_PRIVATE_KEY: ${GC_PRIVATE_KEY}
     ports:
-      - "3000:3000"
+      - 3000:3000

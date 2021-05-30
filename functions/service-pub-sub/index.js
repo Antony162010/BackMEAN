@@ -13,7 +13,7 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`listening on port: ${port}`));
 
 app.post("/", async (req, res) => {
-  const data = decodeBase64Json(req.body.data);
+  const data = decodeBase64Json(req.body.message.data);
   try {
     coreFunction(data);
     res.status(204).send();
