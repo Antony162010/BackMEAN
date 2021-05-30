@@ -5,7 +5,5 @@ services:
     build: .
     image: ${CONTAINER_REGISTRY}:${CI_COMMIT_SHA}
     restart: always
-    env_file:
-      - ./.env.prod
     ports:
       - "3000:3000"

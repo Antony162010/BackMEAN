@@ -4,4 +4,4 @@ export CONTAINER_REGISTRY=us.gcr.io/$GC_PROJECT_ID/backmean
 
 # docker login -u _json_key --password-stdin https://us.gcr.io < src/config/gcp-key.json # Only first time
 envsubst < ./system/template-docker-compose.yml > ./docker-compose.yml
-docker-compose --env-file "./.env.prod" build 
+docker-compose --env-file "./.env" build 
