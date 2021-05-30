@@ -36,6 +36,7 @@ build-app:
     - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/service-account.json
   script:
     - bash ./scripts/build-container-prod.sh
+    - cat ./docker-compose.yml
   only:
     - develop
 
