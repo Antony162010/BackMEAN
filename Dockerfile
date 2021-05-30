@@ -8,7 +8,6 @@ WORKDIR /app
 COPY ["package.json", "yarn.lock", "./"]
 
 RUN yarn 
-RUN echo $GC_PROJECT_ID
 
 COPY . .
 

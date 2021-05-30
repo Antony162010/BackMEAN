@@ -5,4 +5,7 @@ export TYPE_ENV=.prod
 
 # docker login -u _json_key --password-stdin https://us.gcr.io < src/config/gcp-key.json # Only first time
 envsubst < ./system/template-docker-compose.yml > ./docker-compose.yml
+docker-compose --env-file ./.env.prod config > docker-compose.yaml
+rm docker-compose.yml
+mv docker-compose.yaml docker-compose.yml
 docker-compose build 
