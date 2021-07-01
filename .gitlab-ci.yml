@@ -29,7 +29,9 @@ build-app:
     - docker:19.03.1-dind
   stage: build
   before_script:
-    - apk update && apk add bash curl gettext && apk --no-cache add docker-compose=1.26.0
+    - apk update && apk add bash curl gettext
+    - apk add --no-cache --virtual docker-cli python3 .docker-compose-deps python3-dev libffi-dev openssl-dev gcc libc-dev make python3 py3-pip py-pip curl libffi-dev openssl-dev gcc libc-dev rust cargo make
+    - pip install docker-compose
     - export CONTAINER_REGISTRY=us.gcr.io/$GCLOUD_PROJECT_ID/backmean
     - echo $GCLOUD_SERVICE_KEY | base64 -d  > ${HOME}/service-account.json
     - echo $ENV_PROD | base64 -d  > ./.env.prod

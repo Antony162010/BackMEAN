@@ -1,7 +1,7 @@
-const assert = require("assert"),
-  chai = require("chai"),
+const chai = require("chai"),
   chaiHttp = require("chai-http"),
   expect = chai.expect,
+  assert = chai.assert,
   should = chai.should();
 
 const server = require("../src/app");
@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 describe("Array", function () {
   describe("#indexOf()", function () {
     it("should return -1 when the value is not present", function () {
-      assert.equal([1, 2, 3].indexOf(4), -1);
+      assert.strictEqual([1, 2, 3].indexOf(4), -1);
     });
   });
 });
