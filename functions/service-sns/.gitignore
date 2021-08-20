@@ -1,0 +1,15 @@
+#Express-generator
+node_modules/
+npm-debug.log
+
+#Personal
+.idea/
+.scannerwork/
+public/
+.env
+.env.prod
+
+*.log
+sonar-project.properties
+
+gcp-key.json
